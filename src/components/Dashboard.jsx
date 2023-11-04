@@ -15,7 +15,7 @@ export default function Dashboard() {
           graphqlOperation(listTRANSACTIONS)
         );
         const transactionsResult = transactionData.data.listTRANSACTIONS.items;
-        // Aggregate the transactions into the data needed for the PieChart
+      
         const aggregatedData = aggregateTransactionData(transactionsResult);
         setTransactionData(aggregatedData);
       } catch (err) {
@@ -25,7 +25,7 @@ export default function Dashboard() {
     fetchTransactions();
   }, []);
 
-  // Helper function to aggregate data
+ 
   function aggregateTransactionData(transactions) {
     const dataMap = new Map();
     transactions.forEach((transaction) => {

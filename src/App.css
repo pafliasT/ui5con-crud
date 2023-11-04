@@ -41,3 +41,21 @@
         transform: rotate(360deg);
     }
 }
+
+@keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 3px #4CAF50;
+    }
+    50% {
+      box-shadow: 0 0 8px #4CAF50;
+    }
+  }
+  
+  @keyframes warning {
+    0%, 100% {
+      box-shadow: 0 0 3px #F44336;
+    }
+    50% {
+      box-shadow: 0 0 8px #F44336;
+    }
+  }

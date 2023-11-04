@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import {
   Card,
   CardHeader,
-  ResponsiveGridLayout,
   Icon,
+  ResponsiveGridLayout,
 } from "@ui5/webcomponents-react";
 import { useI18nBundle } from "@ui5/webcomponents-react-base";
 
@@ -15,38 +15,20 @@ function BalanceBox({ transactions }) {
   const i18nBundle = useI18nBundle("myApp");
 
   useEffect(() => {
-    setBalance(totalCredit - totalDebit);
-  }, [totalCredit, totalDebit]);
+    const calculateTotals = () => {
+      const totalDebit = transactions
+        .filter((transaction) => transaction.cashFlow === "debit")
+        .reduce((acc, transaction) => acc + Number(transaction.amount), 0);
+      const totalCredit = transactions
+        .filter((transaction) => transaction.cashFlow === "credit")
+        .reduce((acc, transaction) => acc + Number(transaction.amount), 0);
 
-  useEffect(() => {
-    if (transactions.length !== 0) {
-      const queryTotalDebit = transactions.filter(
-        (item) => item.cashFlow === "debit"
-      );
+      setTotalDebit(totalDebit);
+      setTotalCredit(totalCredit);
+      setBalance(totalCredit - totalDebit);
+    };
 
-      if (queryTotalDebit.length !== 0) {
-        setTotalDebit(
-          queryTotalDebit
-            .map((transaction) => transaction.amount)
-            .reduce((total, amount) => total + amount)
-        );
-      }
-
-      const queryTotalCredit = transactions.filter(
-        (item) => item.cashFlow === "credit"
-      );
-
-      if (queryTotalCredit.length !== 0) {
-        setTotalCredit(
-          queryTotalCredit
-            .map((transaction) => transaction.amount)
-            .reduce((total, amount) => total + amount)
-        );
-      }
-    } else {
-      setTotalCredit(0);
-      setTotalDebit(0);
-    }
+    calculateTotals();
   }, [transactions]);
 
   return (
@@ -60,31 +42,41 @@ function BalanceBox({ transactions }) {
     >
       <Card
         key="credit"
+        style={{
+          borderColor: "#4CAF50",
+          borderWidth: 1,
+          borderStyle: "solid",
+          borderRadius: "8px",
+        }}
         header={
           <CardHeader
-            avatar={<Icon name="sys-add" style={{ color: "blue" }} />}
-            interactive="false"
-            titleText={totalCredit.toLocaleString(navigator.language, {
-              style: "decimal",
-              maximumFractionDigits: "2",
-              minimumFractionDigits: "2",
+            avatar={<Icon name="add" style={{ color: "#4CAF50" }} />}
+            interactive={false}
+            titleText={i18nBundle.getText("totalCredit")}
+            subtitleText={totalCredit.toLocaleString(navigator.language, {
+              style: "currency",
+              currency: "USD",
             })}
-            subtitleText={i18nBundle.getText("totalCredit")}
           />
         }
       />
       <Card
         key="debit"
+        style={{
+          borderColor: "#F44336",
+          borderWidth: 1,
+          borderStyle: "solid",
+          borderRadius: "8px",
+        }}
         header={
           <CardHeader
-            avatar={<Icon name="sys-minus" style={{ color: "red" }} />}
-            interactive="false"
-            titleText={totalDebit.toLocaleString(navigator.language, {
-              style: "decimal",
-              maximumFractionDigits: "2",
-              minimumFractionDigits: "2",
+            avatar={<Icon name="less" style={{ color: "#F44336" }} />}
+            interactive={false}
+            titleText={i18nBundle.getText("totalDebit")}
+            subtitleText={totalDebit.toLocaleString(navigator.language, {
+              style: "currency",
+              currency: "USD",
             })}
-            subtitleText={i18nBundle.getText("totalDebit")}
           />
         }
       />
@@ -92,19 +84,34 @@ function BalanceBox({ transactions }) {
         key="balance"
         header={
           <CardHeader
-            avatar={<Icon name="lead" style={{ color: "black" }} />}
-            interactive="false"
-            titleText={balance.toLocaleString(navigator.language, {
-              style: "decimal",
-              maximumFractionDigits: "2",
-              minimumFractionDigits: "2",
+            avatar={
+              <Icon
+                name="lead"
+                style={{ color: balance >= 0 ? "#4CAF50" : "#F44336" }}
+              />
+            }
+            interactive={false}
+            titleText={i18nBundle.getText("totalBalance")}
+            subtitleText={balance.toLocaleString(navigator.language, {
+              style: "currency",
+              currency: "USD",
             })}
-            subtitleText={i18nBundle.getText("totalBalance")}
           />
         }
+        style={{
+          borderColor: balance >= 0 ? "#4CAF50" : "#F44336",
+          borderWidth: 1,
+          borderStyle: "solid",
+          borderRadius: "8px",
+          animation: `${
+            balance >= 0 ? "glow" : "warning"
+          } 1s infinite ease-in-out`,
+        }}
       />
     </ResponsiveGridLayout>
   );
 }
 
 export default BalanceBox;
+
+//
