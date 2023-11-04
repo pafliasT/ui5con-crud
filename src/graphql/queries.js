@@ -8,6 +8,7 @@ export const getTRANSACTION = /* GraphQL */ `
       date
       payee
       category
+      paymentMethod
       cashFlow
       amount
       comment
@@ -39,6 +40,7 @@ export const listTRANSACTIONS = /* GraphQL */ `
         date
         payee
         category
+        paymentMethod
         cashFlow
         amount
         comment

@@ -122,8 +122,8 @@ function TransactionTable({
 
   return (
     <AnalyticalTable
-      infiniteScroll="true"
-      infiniteScrollThreshold="10"
+      // infiniteScroll="true"
+      // infiniteScrollThreshold="10"
       minRows="10"
       sortable="true"
       filterable="true"

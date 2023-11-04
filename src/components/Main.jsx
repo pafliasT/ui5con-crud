@@ -19,37 +19,46 @@ function Main() {
 
   let navigate = useNavigate();
   const i18nBundle = useI18nBundle("myApp");
+  // Define the inline style for the background
+  const containerStyles = {
+    backgroundColor: "#29313a", // Set the color you want
+    // Add some padding if needed
+  };
 
   return (
     <>
-      <ShellBar
-        profile={<Avatar id="avatar" icon="employee" shape="Cicle" size="XS" />}
-        onProfileClick={() => setPopoverProfileState(true)}
-        onProductSwitchClick={() => setPopoverProductState(true)}
-        primaryTitle={i18nBundle.getText("appTitle")}
-        showNotifications="true"
-        showProductSwitch="true"
-        logo={<img src="UI5con_logo.png" alt="UI5con logo" />}
-        onLogoClick={() => {
-          navigate("/");
-        }}
-      />
-      <ProductPopover
-        popoverProductState={popoverProductState}
-        setPopoverProductState={setPopoverProductState}
-      />
-      <ProfilePopover
-        popoverProfileState={popoverProfileState}
-        setPopoverProfileState={setPopoverProfileState}
-      />
-      <FlexBox
-        style={{ width: "100%", height: "100vh" }}
-        direction={FlexBoxDirection.Column}
-        alignItems={FlexBoxAlignItems.Center}
-      >
-        <p />
-        <Outlet />
-      </FlexBox>
+      <div style={containerStyles}>
+        <ShellBar
+          profile={
+            <Avatar id="avatar" icon="employee" shape="Cicle" size="XS" />
+          }
+          onProfileClick={() => setPopoverProfileState(true)}
+          onProductSwitchClick={() => setPopoverProductState(true)}
+          primaryTitle={i18nBundle.getText("appTitle")}
+          showNotifications="true"
+          showProductSwitch="true"
+          logo={<img src="UI5con_logo.png" alt="UI5con logo" />}
+          onLogoClick={() => {
+            navigate("/");
+          }}
+        />
+        <ProductPopover
+          popoverProductState={popoverProductState}
+          setPopoverProductState={setPopoverProductState}
+        />
+        <ProfilePopover
+          popoverProfileState={popoverProfileState}
+          setPopoverProfileState={setPopoverProfileState}
+        />
+        <FlexBox
+          style={{ width: "100%", height: "100vh" }}
+          direction={FlexBoxDirection.Column}
+          alignItems={FlexBoxAlignItems.Center}
+        >
+          <p />
+          <Outlet />
+        </FlexBox>
+      </div>
     </>
   );
 }

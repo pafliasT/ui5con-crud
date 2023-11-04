@@ -11,6 +11,7 @@ export const createTRANSACTION = /* GraphQL */ `
       date
       payee
       category
+      paymentMethod
       cashFlow
       amount
       comment
@@ -30,6 +31,7 @@ export const updateTRANSACTION = /* GraphQL */ `
       date
       payee
       category
+      paymentMethod
       cashFlow
       amount
       comment
@@ -49,6 +51,7 @@ export const deleteTRANSACTION = /* GraphQL */ `
       date
       payee
       category
+      paymentMethod
       cashFlow
       amount
       comment

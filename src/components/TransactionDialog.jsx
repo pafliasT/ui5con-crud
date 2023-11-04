@@ -130,15 +130,30 @@ function TransactionDialog({
             <ComboBoxItem text={i18nBundle.getText("categoryWork")} />
           </ComboBox>
         </FormItem>
+
         <FormItem label={i18nBundle.getText("transactionPaymentMethod")}>
-          <Input
+          {/* <Input
             required="true"
             value={formState.paymentMethod}
             onInput={(event) =>
               handleInputChanges("paymentMethod", event.target.value)
             }
-          />
+          /> */}
+          <ComboBox
+            value={formState.paymentMethod}
+            onChange={(event) =>
+              handleInputChanges("paymentMethod", event.target.value)
+            }
+            onInput={(event) =>
+              handleInputChanges("paymentMethod", event.target.value)
+            }
+            required="true"
+          >
+            <ComboBoxItem text="Cash" />
+            <ComboBoxItem text="Credit Card" />
+          </ComboBox>
         </FormItem>
+
         <FormItem label={i18nBundle.getText("transactionCashFlow")}>
           <RadioButton
             name="GroupA"

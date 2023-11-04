@@ -8,6 +8,7 @@ type TRANSACTION @model {
   date: AWSDate!
   payee: String!
   category: String!
+  paymentMethod: String!
   cashFlow: CashFlow!
   amount: Float!
   comment: String!

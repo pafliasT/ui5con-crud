@@ -7,32 +7,28 @@ import { setTheme } from "@ui5/webcomponents-base/dist/config/Theme";
 import Main from "./components/Main";
 import Dashboard from "./components/Dashboard";
 import Transactions from "./components/Transactions";
+import NotFound from "./components/NotFound";
 
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 
 function App() {
-  setTheme("sap_fiori_3");
+  setTheme("sap_fiori_3_dark");
 
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Main />}>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="transactions" element={<Transactions />} />
-          </Route>
-          <Route
-            path="*"
-            element={
-              <main style={{ padding: "1rem" }}>
-                <p>Page not found!</p>
-              </main>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+   
+      <ThemeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Main />}>
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="transactions" element={<Transactions />} />
+            </Route>
+            <Route path="*" element={<NotFound />} /> 
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+  
   );
 }
 

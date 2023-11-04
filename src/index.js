@@ -11,16 +11,15 @@ import { registerI18nLoader } from "@ui5/webcomponents-base/dist/asset-registrie
 import parse from "@ui5/webcomponents-base/dist/PropertiesFileFormat.js";
 
 const supportedLocales = ["en", "it"];
-console.log("About to register i18n loader");
 supportedLocales.forEach((localeToRegister) => {
   registerI18nLoader("myApp", localeToRegister, async (localeId) => {
     const props = await (
-      await fetch(`./i18n/i18n_${localeId}.properties`)
+      await fetch(`./assets/i18n/i81n_${localeId}.properties`)
     ).text();
     return parse(props); // this call is required for parsing the properties text
   });
 });
-console.log("After register i18n loader");
+
 const container = document.getElementById("root");
 const root = createRoot(container);
 

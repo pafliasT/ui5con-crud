@@ -38,7 +38,7 @@ export default function Transactions() {
         graphqlOperation(listTRANSACTIONS)
       );
 
-      let transactionsResult = transactionData.data.listTransactions.items;
+      let transactionsResult = transactionData.data.listTRANSACTIONS.items;
       transactionsResult.sort(
         (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
       );
@@ -46,7 +46,7 @@ export default function Transactions() {
 
       setTransactions(transactionsResult);
     } catch (err) {
-      console.log("error fetching Transactions");
+      console.error("error fetching Transactions : ", err);
     }
   }
 
